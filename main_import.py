@@ -239,23 +239,25 @@ def process_outcome_2010(df_outcome_2010, rentals_df, total_inflation_df, minimu
     df_outcome_2010['rent_price_index'] = rentals_df.iloc[0]['2010']
     df_outcome_2010['inflation_index'] = total_inflation_df.iloc[0]['2010']
     df_outcome_2010['minimum_wage_PC_mean_income'] = minimum_wage_PC.iloc[0]['2010']
-
-    df_outcome_2010['PC_eating_fruit'] = None  #15 to 29 YRS	  (24.7)	
-    df_outcome_2010.loc[df_outcome_2010['age'] == 'Y18-24', 'PC_eating_fruit'] = 17.9
-
-    huurwoningen_2012 = huurwoningen_df[huurwoningen_df['categories1'] == '2012']
-    df_outcome_2010['Regulated rental dwellings (%)'] = huurwoningen_2012.loc[huurwoningen_2012.index[0], 'Gereguleerde huurwoningen1) (%)']
-
     df_outcome_2010['mobile_students_from_abroad'] = mobile_students_from_abroad_df['2013']
 
-    average_student_debt_18_24, average_student_debt_18_34, average_student_debt_25_34, total_student_debt_NL = calculate_average_student_debt_2011_NL(student_debt_df)
-    df_outcome_2010['average_student_debt'] = None 
-    df_outcome_2010['total_student_debt_NL'] = total_student_debt_NL
-    df_outcome_2010.loc[df_outcome_2010['age'] == 'Y18-24', 'average_student_debt'] = average_student_debt_18_24
-    df_outcome_2010.loc[df_outcome_2010['age'] == 'Y18-34', 'average_student_debt'] = average_student_debt_18_34
-    df_outcome_2010.loc[df_outcome_2010['age'] == 'Y25-34', 'average_student_debt'] = average_student_debt_25_34
 
-    df_outcome_2010['gemiddelde_verkoopprijs_woning'] = 239.530 #https://www.cbs.nl/nl-nl/cijfers/detail/83906NED?dl=64BA2
+    if COUNTRY == 'Netherlands':
+
+        huurwoningen_2012 = huurwoningen_df[huurwoningen_df['categories1'] == '2012']
+        df_outcome_2010['PC_eating_fruit'] = None  #15 to 29 YRS	  (24.7)	
+        df_outcome_2010.loc[df_outcome_2010['age'] == 'Y18-24', 'PC_eating_fruit'] = 17.9
+        df_outcome_2010['Regulated rental dwellings (%)'] = huurwoningen_2012.loc[huurwoningen_2012.index[0], 'Gereguleerde huurwoningen1) (%)']
+
+        average_student_debt_18_24, average_student_debt_18_34, average_student_debt_25_34, total_student_debt_NL = calculate_average_student_debt_2011_NL(student_debt_df)
+        df_outcome_2010['average_student_debt'] = None 
+        df_outcome_2010['total_student_debt_NL'] = total_student_debt_NL
+        df_outcome_2010.loc[df_outcome_2010['age'] == 'Y18-24', 'average_student_debt'] = average_student_debt_18_24
+        df_outcome_2010.loc[df_outcome_2010['age'] == 'Y18-34', 'average_student_debt'] = average_student_debt_18_34
+        df_outcome_2010.loc[df_outcome_2010['age'] == 'Y25-34', 'average_student_debt'] = average_student_debt_25_34
+
+        df_outcome_2010['gemiddelde_verkoopprijs_woning'] = 239.530 #https://www.cbs.nl/nl-nl/cijfers/detail/83906NED?dl=64BA2
+        
     return df_outcome_2010
 
 
@@ -296,23 +298,23 @@ def process_outcome_2020(df_outcome_2020, rentals_df, total_inflation_df, minimu
     df_outcome_2020['mobile_students_from_abroad']  = mobile_students_from_abroad_df['2020']
 
     df_outcome_2020['minimum_wage_PC_mean_income'] = minimum_wage_PC.iloc[0]['2020']
-    df_outcome_2020['gemiddelde_verkoopprijs_woning'] = 334.488
-
-    huurwoningen_2021 = huurwoningen_df[huurwoningen_df['categories1'] == '2021']
-
+    
     df_outcome_2020['inflation_index'] = total_inflation_df.iloc[0]['2020']
 
-    huurwoningen_2021 = huurwoningen_df[huurwoningen_df['categories1'] == '2021']
-    df_outcome_2020['Regulated rental dwellings (%)'] = huurwoningen_2021.loc[huurwoningen_2021.index[0], 'Gereguleerde huurwoningen1) (%)'] 
 
-    df_outcome_2020['average_student_debt'] = None
-    average_student_debt_18_24, average_student_debt_18_34, average_student_debt_25_34, total_student_debt_NL = calculate_average_student_debt_2020_NL(student_debt_df)
-    df_outcome_2020['total_student_debt_NL'] = total_student_debt_NL
-    df_outcome_2020.loc[df_outcome_2020['age'] == 'Y18-24', 'average_student_debt'] = average_student_debt_18_24
-    df_outcome_2020.loc[df_outcome_2020['age'] == 'Y18-34', 'average_student_debt'] = average_student_debt_18_34
-    df_outcome_2020.loc[df_outcome_2020['age'] == 'Y25-34', 'average_student_debt'] = average_student_debt_25_34
+    if COUNTRY == 'Netherlands':
 
-    df_outcome_2020['gemiddelde_verkoopprijs_woning'] = 334.488
+        huurwoningen_2021 = huurwoningen_df[huurwoningen_df['categories1'] == '2021']
+        df_outcome_2020['Regulated rental dwellings (%)'] = huurwoningen_2021.loc[huurwoningen_2021.index[0], 'Gereguleerde huurwoningen1) (%)'] 
+
+        df_outcome_2020['average_student_debt'] = None
+        average_student_debt_18_24, average_student_debt_18_34, average_student_debt_25_34, total_student_debt_NL = calculate_average_student_debt_2020_NL(student_debt_df)
+        df_outcome_2020['total_student_debt_NL'] = total_student_debt_NL
+        df_outcome_2020.loc[df_outcome_2020['age'] == 'Y18-24', 'average_student_debt'] = average_student_debt_18_24
+        df_outcome_2020.loc[df_outcome_2020['age'] == 'Y18-34', 'average_student_debt'] = average_student_debt_18_34
+        df_outcome_2020.loc[df_outcome_2020['age'] == 'Y25-34', 'average_student_debt'] = average_student_debt_25_34
+
+        df_outcome_2020['gemiddelde_verkoopprijs_woning'] = 334.488
     return df_outcome_2020
 
 
