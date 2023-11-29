@@ -341,8 +341,9 @@ def process_country(COUNTRY):
     df_outcome_2010 = process_outcome_2010(df_outcome_2010, rentals_df, total_inflation_df, minimum_wage_PC, young_people_married, huurwoningen_df, mobile_students_from_abroad_df, student_debt_df)
     return df_outcome_2010, df_outcome_2020
 
+
 df_outcome_2010, df_outcome_2020 = process_country('Netherlands')
-print(df_outcome_2010)
+print(df_outcome_2010.shape)
   
 
   
